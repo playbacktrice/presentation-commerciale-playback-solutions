@@ -1,85 +1,85 @@
 'use strict';
 
-const navigation = document.querySelector('.navigation');
+const panel = document.querySelector('.menu-panel');
 const toggle = document.querySelector('.menu-toggle');
-const mobile = window.matchMedia('(max-width: 1100px)');
+const close = document.querySelector('.menu-close');
+const backdrop = document.querySelector('.menu-backdrop');
+const main = document.querySelector('main');
+const footer = document.querySelector('.site-footer');
+const brand = document.querySelector('.site-header .brand');
+let open = false;
 
-function setMenu(open, restoreFocus = false) {
-  navigation.classList.toggle('is-open', open);
-  toggle.setAttribute('aria-expanded', String(open));
-  toggle.querySelector('.menu-label').textContent = open ? 'Fermer' : 'Menu';
-  if (mobile.matches) navigation.inert = !open;
-  else navigation.inert = false;
-  document.body.classList.toggle('menu-open', open && mobile.matches);
-  if (restoreFocus) toggle.focus();
-}
-
-if (navigation && toggle) {
-  // Progressive enhancement: all navigation links remain available without JS.
-  document.documentElement.classList.add('has-menu');
-  setMenu(false);
-  toggle.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
-  navigation.addEventListener('click', event => {
+if (panel && toggle && close && backdrop) {
+  document.documentElement.classList.add('menu-ready');
+  panel.inert = true;
+  function setMenu(value) {
+    open = value;
+    panel.inert = !value;
+    backdrop.hidden = !value;
+    toggle.setAttribute('aria-expanded', String(value));
+    toggle.setAttribute('aria-label', value ? 'Fermer le menu' : 'Ouvrir le menu');
+    document.body.classList.toggle('menu-open', value);
+    main.inert = value;
+    footer.inert = value;
+    brand.inert = value;
+    toggle.inert = value;
+    if (value) {
+      panel.setAttribute('role', 'dialog');
+      panel.setAttribute('aria-modal', 'true');
+      close.focus({ preventScroll: true });
+    } else {
+      panel.removeAttribute('role');
+      panel.removeAttribute('aria-modal');
+      toggle.focus({ preventScroll: true });
+    }
+  }
+  toggle.addEventListener('click', () => setMenu(!open));
+  close.addEventListener('click', () => setMenu(false));
+  backdrop.addEventListener('click', () => setMenu(false));
+  panel.addEventListener('click', event => {
     if (event.target.closest('a')) setMenu(false);
   });
   document.addEventListener('keydown', event => {
-    if (toggle.getAttribute('aria-expanded') !== 'true' || !mobile.matches) return;
-    if (event.key === 'Escape') setMenu(false, true);
+    if (!open) return;
+    if (event.key === 'Escape') setMenu(false);
     if (event.key === 'Tab') {
-      const links = [...navigation.querySelectorAll('a')];
-      const last = links[links.length - 1];
-      if (event.shiftKey && document.activeElement === toggle) {
+      const items = [...panel.querySelectorAll('a, button')];
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
         event.preventDefault(); last.focus();
       } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault(); toggle.focus();
+        event.preventDefault(); first.focus();
       }
     }
   });
-  mobile.addEventListener('change', () => setMenu(false));
 }
 
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-const search = document.querySelector('#project-query');
-if (search) {
-  const rows = [...document.querySelectorAll('[data-project]')];
-  const normalize = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('fr').replace(/[^a-z0-9]+/g, ' ').trim();
-  const index = rows.map(row => normalize(row.textContent));
-  const updateSearch = () => {
-    const words = normalize(search.value).split(' ').filter(Boolean);
-    let visible = 0;
-    rows.forEach((row, i) => {
-      row.hidden = !words.every(word => index[i].includes(word));
-      if (!row.hidden) visible++;
-    });
-    document.querySelector('#project-count').textContent = `${visible} référence${visible > 1 ? 's' : ''} sur ${rows.length}`;
-    document.querySelector('#project-empty').hidden = visible !== 0;
+const carousel = document.querySelector('.carousel');
+if (carousel) {
+  const slides = [...carousel.querySelectorAll('.carousel-slide')];
+  const controls = carousel.querySelector('.carousel-controls');
+  const counter = carousel.querySelector('.slide-counter');
+  let active = 0;
+  const update = () => {
+    slides.forEach((slide, index) => { slide.hidden = index !== active; });
+    counter.textContent = `${String(active + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+    const slide = slides[active];
+    const light = slide.querySelector('.has-photo') && slide.dataset.tone === 'light';
+    carousel.classList.toggle('light-controls', Boolean(light));
+    document.body.classList.toggle('light-header', Boolean(light));
   };
-  document.querySelector('.project-search').hidden = false;
-  search.addEventListener('input', updateSearch);
-  updateSearch();
-}
-
-if ('IntersectionObserver' in window && !reducedMotion.matches) {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {threshold: 0.08});
-  document.querySelectorAll('[data-reveal]').forEach(element => {
-    element.classList.add('will-reveal');
-    observer.observe(element);
+  const move = delta => {
+    active = (active + delta + slides.length) % slides.length;
+    update();
+  };
+  controls.hidden = slides.length < 2;
+  carousel.querySelector('.slide-prev').addEventListener('click', () => move(-1));
+  carousel.querySelector('.slide-next').addEventListener('click', () => move(1));
+  carousel.addEventListener('keydown', event => {
+    if (event.key === 'ArrowLeft') { event.preventDefault(); move(-1); }
+    if (event.key === 'ArrowRight') { event.preventDefault(); move(1); }
   });
-  // A keyboard user must never focus invisible content.
-  document.addEventListener('focusin', event => {
-    event.target.closest('.will-reveal')?.classList.add('is-visible');
-  });
-  reducedMotion.addEventListener('change', event => {
-    if (event.matches) {
-      observer.disconnect();
-      document.querySelectorAll('.will-reveal').forEach(el => el.classList.add('is-visible'));
-    }
-  });
+  // Manual navigation only: no autoplay, gesture hijacking or motion dependency.
+  update();
 }
