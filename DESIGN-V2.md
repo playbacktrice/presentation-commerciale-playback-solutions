@@ -22,3 +22,11 @@ Les captures statiques ne permettent pas de mesurer les interactions ou les timi
 Les compositions issues des captures sont conservées et adaptées à une identité entièrement sombre : fonds noirs, textes clairs, logos blancs et panneau latéral noir. La présentation est recentrée sur les systèmes techniques pour le spectacle vivant. Les textes anglais sont réécrits en français ; les intitulés Creative Lab, Performing Systems et Reliable Systems restent inchangés.
 
 Une section Références visible sur l’accueil présente cinq noms demandés avec des emplacements photographiques. Aucune prestation n’est attribuée aux projets. Les coordonnées validées sont limitées aux seules sections Contact. Les anciennes notes de composition ci-dessus décrivent l’analyse des captures et l’état initial, pas les couleurs finales après correction.
+
+## Renforcement du laboratoire et collection complète
+
+Accueil : titre « Un laboratoire d’ingénierie. », deux paragraphes courts et accès privilégié à Creative Lab. Les six compétences sont intégrées à la même surface, sur une seule ligne à six colonnes sur ordinateur et deux colonnes sur mobile. Pictogrammes au trait, sans cartes supplémentaires ni grande illustration.
+
+Creative Lab : recherche, contrôleurs/interfaces et logiciels/systèmes spécifiques, avec trois emplacements photo réels. Les autres expertises conservent leurs compositions et des textes de rôle complémentaires.
+
+Références : sélection de sept projets ou artistes, dont Kungs et Damso ; collection complète repliée par défaut, sans page ni entrée de navigation ajoutée. Les éditions sont regroupées par artiste ou production. En l’absence d’image, les noms sont composés sobrement, sans faux visuels ni plusieurs dizaines de cadres vides. Les cinq entrées de données encore signalées à confirmer restent exclues de l’affichage.

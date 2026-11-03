@@ -81,8 +81,26 @@ const output = process.env.PREVIEW_DIR;
       }
       await page.goto(base);
       const featured = page.locator('.reference-card h3');
-      assert.deepEqual(await featured.allTextContents(), ['Justice','Polo & Pan','Mylène Farmer','Eddy de Pretto','Jeux olympiques de Paris 2024']);
-      assert.equal(await page.locator('.reference-card .media').count(), 5);
+      assert.deepEqual(await featured.allTextContents(), ['Justice','Polo & Pan','Mylène Farmer','Eddy de Pretto','Kungs','Damso','Jeux olympiques de Paris 2024']);
+      assert.equal(await page.locator('.reference-card .media').count(), 7);
+      assert.equal(await page.locator('.skills-strip li').count(), 6);
+      assert.equal(await page.locator('.skills-strip svg').count(), 6);
+      const strip = await page.locator('.skills-strip').boundingBox();
+      assert(strip.height < (width <= 600 ? 380 : 160), `Capabilities strip too tall at ${width}px`);
+      const details = page.locator('.reference-collection');
+      const summary = details.locator('summary');
+      assert(!(await details.evaluate(el=>el.open)));
+      assert.equal(await page.locator('.collection-card:visible').count(), 0);
+      await summary.focus();
+      await page.keyboard.press('Enter');
+      assert(await details.evaluate(el=>el.open));
+      assert.equal(await page.locator('.collection-card:visible').count(), 32);
+      assert.equal(await page.locator('.collection-card').evaluateAll(cards=>cards.flatMap(card=>card.dataset.projectSlugs.split(' ')).length), 35);
+      assert((await page.locator('[data-project-slugs~="mylene-farmer-nevermore"]').textContent()).includes('2019 · Nevermore'));
+      assert((await page.locator('[data-project-slugs~="jarre-al-ula"]').textContent()).includes('Al Ula · The Green Concert'));
+      assert(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth+1), `Collection overflow at ${width}px`);
+      await summary.click();
+      assert(!(await details.evaluate(el=>el.open)));
       await page.locator('.references-section').scrollIntoViewIfNeeded();
       assert(await featured.first().isVisible());
       const next = page.locator('.slide-next');
@@ -110,6 +128,10 @@ const output = process.env.PREVIEW_DIR;
           await page.screenshot({path:`${output}/${file.replace('.html','')}-${width}.png`,fullPage:true});
         }
         await page.goto(base);
+        await page.locator('.reference-collection summary').click();
+        await page.evaluate(()=>scrollTo(0,0));
+        await page.screenshot({path:`${output}/references-${width}.png`,fullPage:true});
+        await page.goto(base);
         await page.locator('.menu-toggle').click();
         await page.screenshot({path:`${output}/menu-${width}.png`});
       }
@@ -121,10 +143,11 @@ const output = process.env.PREVIEW_DIR;
       await p.goto(base+file);
       assert(await p.locator('nav a').first().isVisible());
       assert(await p.locator('h1').isVisible());
+      if(file==='index.html') { await p.locator('.reference-collection summary').click(); assert.equal(await p.locator('.collection-card:visible').count(),32); }
       assert(await p.evaluate(()=>document.documentElement.scrollWidth <= innerWidth+1),`No-JS overflow on ${file}`);
     }
     await noJS.close();
     assert.deepEqual(errors,[]);
-    console.log(`PASS: ${checks} page/viewport checks; all navigation destinations; drawer keyboard/focus/backdrop/close; carousel navigation/wrap/keyboard; logos; dark surfaces/contrast; contact-only phone/email; 5 visible references; no-JS fallback; reduced motion; no JavaScript or HTTP errors. Base: ${base}`);
+    console.log(`PASS: ${checks} page/viewport checks; all navigation destinations; drawer keyboard/focus/backdrop/close; carousel navigation/wrap/keyboard; logos; dark surfaces/contrast; contact-only phone/email; 6 compact pictograms; 7 featured references; 35 approved entries/32 native expandable groups; no-JS fallback; reduced motion; no JavaScript or HTTP errors. Base: ${base}`);
   } finally { await browser.close(); }
 })().catch(error=>{console.error(error);process.exitCode=1});

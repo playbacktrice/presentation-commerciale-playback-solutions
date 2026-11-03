@@ -89,5 +89,26 @@
     "alt": "",
     "credit": "",
     "approved": false
+  },
+  "reference-kungs": {
+    "label": "Concert — Kungs",
+    "src": "",
+    "alt": "",
+    "credit": "",
+    "approved": false
+  },
+  "reference-damso": {
+    "label": "Concert — Damso",
+    "src": "",
+    "alt": "",
+    "credit": "",
+    "approved": false
+  },
+  "lab-software": {
+    "label": "Logiciel ou système spécifique développé par Playback Solutions",
+    "src": "",
+    "alt": "",
+    "credit": "",
+    "approved": false
   }
 }

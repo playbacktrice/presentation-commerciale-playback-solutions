@@ -28,8 +28,8 @@ SITE_URL=http://127.0.0.1:8000/ node scripts/check_browser.cjs
 - `scripts/build.py` : gabarit commun et textes courts des cinq pages.
 - `assets/site.css` : compositions, menu latéral, responsive et préférences de mouvement.
 - `assets/site.js` : panneau de navigation et carrousel manuel.
-- `data/media.json` : douze entrées photographiques réutilisées dans les pages, crédits et autorisations.
-- `data/projects.json` : les 40 références communiquées sont conservées comme données, sans catalogue sur les pages de la V2.
+- `data/media.json` : quinze entrées photographiques réutilisées dans les pages, crédits et autorisations.
+- `data/projects.json` : les 40 entrées communiquées sont conservées ; les 35 entrées confirmées alimentent 32 groupes dans le volet « Toutes les références ». Les cinq entrées encore ambiguës ne sont pas exposées.
 - `assets/*.png` : les quatre logos officiels, conservés sans modification.
 
 Les anciennes pages institutionnelles et les visuels abstraits de la V1 sont retirés de cette branche. Ces suppressions ne concernent pas `main` ni le dossier de prévisualisation existant.
@@ -67,3 +67,11 @@ Le positionnement porte uniquement sur l’ingénierie et les systèmes techniqu
 Selon la dernière instruction de l’utilisateur, le téléphone et l’adresse e-mail fournie sont conservés **uniquement dans les sections Contact**. Aucun de ces liens ou coordonnées dans le menu, le pied de page ou les métadonnées. Les contrôles statiques et navigateur vérifient cette restriction.
 
 Une section d’accueil Références présente Justice, Polo & Pan, Mylène Farmer, Eddy de Pretto et les Jeux olympiques de Paris 2024, avec des emplacements photo et sans attribution de prestation.
+
+## Laboratoire, compétences et références complètes
+
+L’accueil met d’abord en avant le laboratoire d’ingénierie et ses développements sur mesure. Six pictogrammes SVG originaux au trait, accompagnés de titres et d’une ligne de description, forment une bande compacte dans la présentation. Aucun nouveau lien dans le menu. Creative Lab dispose de deux séquences dédiées aux contrôleurs/interfaces et aux logiciels/systèmes spécifiques, avec des emplacements photographiques réels à compléter.
+
+La sélection photographique contient sept références, dont Kungs et Damso. Le volet natif HTML `details` / `summary` « Toutes les références » fonctionne sans JavaScript. Les 35 entrées marquées `publication_approved: true` dans le fichier source sont regroupées par nom en 32 artistes ou productions, avec leurs éditions. Les entrées non confirmées restent dans les données sans être publiées comme références. L’inventaire exact figure dans `REFERENCES.md`.
+
+Une entrée de collection sans image affiche seulement son nom et ses éditions, sans grande case vide. Pour ajouter une photographie autorisée à une référence confirmée, utiliser les champs `image`, `image_alt` et `image_credit` du fichier de projets. Le fichier doit exister sous `assets/photos/`. Le contrôle des chemins, textes alternatifs et crédits est partagé avec les autres photographies. Aucun résultat ou rôle technique n’est généré depuis le nom d’un artiste.
