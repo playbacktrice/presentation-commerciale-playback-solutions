@@ -1,0 +1,12 @@
+{
+  "home-justice": {"label":"Concert — Justice", "artist":"Justice", "src":"", "alt":"", "credit":"", "approved":false, "tone":"dark", "position":"50% 50%"},
+  "home-polo-pan": {"label":"Concert — Polo & Pan", "artist":"Polo & Pan", "src":"", "alt":"", "credit":"", "approved":false, "tone":"dark", "position":"50% 50%"},
+  "home-mylene": {"label":"Concert — Mylène Farmer", "artist":"Mylène Farmer", "src":"", "alt":"", "credit":"", "approved":false, "tone":"dark", "position":"50% 50%"},
+  "lab-workshop": {"label":"Atelier — recherche et prototypage", "src":"", "alt":"", "credit":"", "approved":false},
+  "lab-controller": {"label":"Contrôleur ou interface Playback Solutions", "src":"", "alt":"", "credit":"", "approved":false},
+  "performing-system": {"label":"Système technique Playback Solutions — vue d’ensemble", "src":"", "alt":"", "credit":"", "approved":false},
+  "performing-control": {"label":"Système de playback ou de show-control", "src":"", "alt":"", "credit":"", "approved":false},
+  "performing-justice": {"label":"Concert — Justice", "caption":"Référence communiquée ; périmètre d’intervention à documenter.", "src":"", "alt":"", "credit":"", "approved":false},
+  "reliable-racks": {"label":"Installation réelle — racks et architecture technique", "src":"", "alt":"", "credit":"", "approved":false},
+  "reliable-monitoring": {"label":"Préparation, tests ou supervision d’un système", "src":"", "alt":"", "credit":"", "approved":false}
+}

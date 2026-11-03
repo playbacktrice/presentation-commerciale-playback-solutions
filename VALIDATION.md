@@ -1,35 +1,29 @@
-# Refonte — éléments de revue
+# V2 — validation de la version de revue
 
-Branche : `feat/refonte-site-vitrine`. Base : `e183307`. Aucun changement de `main`, de la configuration GitHub Pages ou de déploiement.
+Développement exclusivement sur `feat/refonte-site-vitrine`, à partir de la V1 `e5fca95`. Aucun changement de `main`, de `/preview/` publié ni des paramètres GitHub Pages.
 
-## Réalisation
+## Résultat préparé
 
-Sept pages statiques : Accueil, Creative Lab, Performing Systems, Reliable Systems, Projets & Références, À propos et Contact. Navigation commune avec page active, menu mobile, accès rapide aux expertises, recherche des références sans distinction d’accents, appels téléphoniques et prise de rendez-vous par téléphone.
+Cinq pages : accueil, trois expertises, contact. Grand carrousel manuel, panneau de navigation blanc depuis la gauche avec fond assombri, compositions éditoriales et matériel/texte inspirées des six captures Opto réellement examinées. Textes courts, grands espaces photographiques, dix emplacements identifiés. Aucun visuel abstrait ou photographie de remplacement. Trois références artistiques mises en contexte ; les 40 références sources restent conservées dans les données.
 
-Identité essentiellement noire et blanche, logos officiels préservés à l’octet près, trois compositions vectorielles abstraites originales. Aucun faux équipement, fausse photographie, faux membre d’équipe, faux e-mail ou attribution technique. Les formulations de marque du brief sont conservées. Les références, titres et dates viennent de la liste fournie ; les intitulés ambigus sont signalés et les doublons regroupés.
+## Contrôles effectués
 
-Structure sans backend ni dépendance de production. Les pages sont générées avec la bibliothèque standard Python et restent de simples fichiers HTML consultables sans compilation. Les données projets sont indépendantes des gabarits et permettent d’ajouter des fiches détaillées et des photographies autorisées.
+- Contrôle statique : cinq pages, 88 liens/ressources/fragments internes, navigation active, dix emplacements photographiques.
+- Les quatre logos officiels et le fichier des 40 références sont identiques à la V1.
+- Régénération des cinq pages reproductible ; vérification syntaxique JavaScript.
+- Contrat d’insertion photographique : image locale autorisée avec texte alternatif et crédit acceptée dans une copie de test isolée ; image non validée refusée. Cette image de test n’est pas intégrée au site.
+- Chromium : cinq pages à 320, 390, 768 et 1440 px, soit 20 couples page/largeur.
+- Même suite sous `/presentation-commerciale-playback-solutions/`, soit 40 couples page/largeur au total.
+- Toutes les destinations du menu sont parcourues par clic. Pas de débordement horizontal ni de titre coupé ; tous les logos chargent.
+- Menu : ouverture, fermeture par bouton, Échap et clic sur le fond ; retour et confinement du focus ; contenu derrière le panneau rendu inactif.
+- Carrousel : précédent/suivant, boucle, touches gauche/droite, une seule diapositive visible, compteur mis à jour. Aucun autoplay.
+- Les cinq pages restent utilisables sans JavaScript ; les préférences de réduction des animations sont respectées.
+- Aucune erreur JavaScript, console ou ressource HTTP en échec pendant ces contrôles.
 
-## Vérifications effectuées
+## Limites et éléments à fournir
 
-- Génération reproductible : résultat identique après une seconde exécution.
-- Contrôle statique : sept pages, 205 liens/ressources/fragments locaux, trois SVG et 40 références.
-- Vérification syntaxique de `assets/site.js` avec Node.
-- Chromium réel : sept pages à 320, 390, 768 et 1440 px, soit 28 couples page/largeur pour chaque chemin de test.
-- Même suite à la racine locale et sous `/presentation-commerciale-playback-solutions/`, soit 56 couples page/largeur au total.
-- Réponses HTTP 200, navigation effective entre toutes les pages, titres non coupés, absence de débordement horizontal et chargement de toutes les images.
-- Recherche : accents ignorés, combinaison artiste/année, absence de résultat et réinitialisation aux 40 références.
-- Menu : ouverture, fermeture par Échap, retour du focus et boucle de tabulation sur mobile/tablette.
-- Sept pages utilisables sans JavaScript ; révélations au défilement testées et réduction des animations respectée.
-- Aucune erreur de console JavaScript ni ressource HTTP en échec pendant les contrôles.
-- Quatre logos PNG identiques à la version originale ; diff sans erreur d’espacement.
+Les tests de navigateur ont été effectués dans Chromium, pas dans Safari/Firefox. Les six captures décrivent une composition desktop ; l’adaptation mobile a été vérifiée dans Chromium. Elles ne prouvent pas les timings d’animation d’Opto.
 
-Ces contrôles ne constituent pas un audit d’accessibilité exhaustif ni un test dans Safari/Firefox. L’utilisation de HTML/CSS standard et l’absence de ressources externes limitent les dépendances. La compatibilité GitHub Pages a été vérifiée localement sous son sous-chemin ; aucune mise en ligne n’a été réalisée pour ce contrôle.
+Aucune photographie Playback Solutions n’a été fournie pour cette V2. Les emplacements sont volontairement vides et nommés. Le rendu final des photographies, le contraste des légendes et les recadrages devront être validés avec les fichiers réels. `PHOTO-BRIEF.md` détaille les dix emplacements, dont la photographie de Justice peut être réutilisée. Les crédits, droits et éventuels périmètres d’intervention doivent être validés.
 
-## En attente de validation
-
-L’accès à `https://www.optolive.com/` reste bloqué par le proxy (403), même après la modification des paramètres annoncée par l’utilisateur. Le statut de l’environnement actif rapporte toujours une politique réseau restreinte sans domaines personnalisés. Aucune analyse effective du site Opto n’a donc pu être réalisée. L’utilisateur ayant demandé de poursuivre malgré le blocage, cette proposition applique les principes visuels du brief et devra être affinée avec des captures ou un accès effectif à la référence.
-
-Reste à confirmer : les intitulés « Clara Lafut », « MC Solar » (2022 et 2023), « MC 2023 » et « Mylène le retour » ; le périmètre réel de chaque intervention ; les descriptions, photos et droits de publication. Les fiches détaillées ne sont pas activées avec des descriptions inventées.
-
-La validation visuelle et éditoriale de l’utilisateur reste nécessaire avant toute fusion ou mise en ligne.
+Cette version n’est pas déployée. Les captures locales de revue ne constituent pas une mise à jour de `/preview/`. Toute mise en ligne attend une autorisation explicite.
