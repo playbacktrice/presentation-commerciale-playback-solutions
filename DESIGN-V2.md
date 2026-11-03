@@ -16,3 +16,9 @@ Accueil limité au carrousel, à une présentation courte avec les trois accès 
 Typographie système noire, grasse pour les titres, proportions modérées. Le poids visuel principal est réservé aux futures photographies réelles. Les dix emplacements gris sont explicitement étiquetés ; ils ne simulent pas des réalisations. Les références Justice, Polo & Pan et Mylène Farmer sont sélectionnées parmi les noms communiqués, sans attribution technique. Les 40 références restent disponibles dans les données sans liste exposée dans les pages.
 
 Les captures statiques ne permettent pas de mesurer les interactions ou les timings d’Opto. La V2 met donc en œuvre une ouverture sobre du panneau et un changement manuel des diapositives, avec réduction des animations et prise en charge du clavier. Aucun code, photographie, logo ou texte d’Opto n’est réutilisé.
+
+## Corrections après retour sur la V2
+
+Les compositions issues des captures sont conservées et adaptées à une identité entièrement sombre : fonds noirs, textes clairs, logos blancs et panneau latéral noir. La présentation est recentrée sur les systèmes techniques pour le spectacle vivant. Les textes anglais sont réécrits en français ; les intitulés Creative Lab, Performing Systems et Reliable Systems restent inchangés.
+
+Une section Références visible sur l’accueil présente cinq noms demandés avec des emplacements photographiques. Aucune prestation n’est attribuée aux projets. Les coordonnées validées sont limitées aux seules sections Contact. Les anciennes notes de composition ci-dessus décrivent l’analyse des captures et l’état initial, pas les couleurs finales après correction.

@@ -64,10 +64,6 @@ if (carousel) {
   const update = () => {
     slides.forEach((slide, index) => { slide.hidden = index !== active; });
     counter.textContent = `${String(active + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
-    const slide = slides[active];
-    const light = slide.querySelector('.has-photo') && slide.dataset.tone === 'light';
-    carousel.classList.toggle('light-controls', Boolean(light));
-    document.body.classList.toggle('light-header', Boolean(light));
   };
   const move = delta => {
     active = (active + delta + slides.length) % slides.length;

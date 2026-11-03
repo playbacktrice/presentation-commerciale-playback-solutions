@@ -31,13 +31,36 @@ const output = process.env.PREVIEW_DIR;
           return images.every(img => img.naturalWidth > 0);
         }), `Broken logo on ${file}`);
         assert.equal(await page.locator('img[src*="visual-"]').count(), 0);
+        assert.equal(await page.locator('a[href^="tel:"]').count(), 1);
+        assert.equal(await page.locator('a[href^="mailto:"]').count(), 1);
+        assert(await page.locator('a[href^="tel:"], a[href^="mailto:"]').evaluateAll(links=>links.every(el=>el.closest('.contact-band'))));
+        assert.equal(await page.locator('a[href^="mailto:"]').getAttribute('href'), 'mailto:anthony@playback-solutions.com');
+        assert.equal(await page.locator('.brand img').getAttribute('src'), 'assets/logo_playback_WHITE_HORIZONTAL.png');
+        assert.equal(await page.locator('[lang="en"]').count(), 0);
+        // All page canvases, placeholders and the drawer must remain dark.
+        assert(await page.locator('body, .menu-panel, .presentation, .contact-band, .references-section, .media.awaiting-photo').evaluateAll(elements=>elements.every(el=>{
+          const rgb=getComputedStyle(el).backgroundColor.match(/[0-9.]+/g).slice(0,3).map(Number);
+          return rgb.every(channel=>channel<=40);
+        })), `Light surface on ${file}`);
+        // Check contrast of actual body/headings and placeholder text on their solid backgrounds.
+        assert(await page.locator('body, .placeholder-subject, .placeholder-label').evaluateAll(elements=>{
+          const rgb=value=>value.match(/[0-9.]+/g).slice(0,3).map(Number);
+          const luminance=color=>rgb(color).map(c=>{c/=255;return c<=.04045?c/12.92:((c+.055)/1.055)**2.4}).reduce((sum,c,i)=>sum+c*[.2126,.7152,.0722][i],0);
+          return elements.every(el=>{
+            let parent=el;
+            while(parent && getComputedStyle(parent).backgroundColor==='rgba(0, 0, 0, 0)')parent=parent.parentElement;
+            if(!parent)return false;
+            const a=luminance(getComputedStyle(el).color),b=luminance(getComputedStyle(parent).backgroundColor);
+            return (Math.max(a,b)+.05)/(Math.min(a,b)+.05)>=4.5;
+          });
+        }), `Insufficient contrast on ${file}`);
         await page.locator('.menu-toggle').click();
         await page.locator('.menu-panel').waitFor({state:'visible'});
         assert.equal(await page.locator('.menu-toggle').getAttribute('aria-expanded'), 'true');
         assert.equal(await page.locator('.menu-panel').getAttribute('aria-modal'), 'true');
         assert(await page.locator('main').evaluate(el => el.inert));
         const first = page.locator('.menu-panel a').first();
-        const last = page.locator('.menu-phone');
+        const last = page.locator('.menu-panel nav a').last();
         await last.focus(); await page.keyboard.press('Tab');
         assert(await first.evaluate(el => el === document.activeElement));
         await page.keyboard.press('Shift+Tab');
@@ -57,6 +80,11 @@ const output = process.env.PREVIEW_DIR;
         checks++;
       }
       await page.goto(base);
+      const featured = page.locator('.reference-card h3');
+      assert.deepEqual(await featured.allTextContents(), ['Justice','Polo & Pan','Mylène Farmer','Eddy de Pretto','Jeux olympiques de Paris 2024']);
+      assert.equal(await page.locator('.reference-card .media').count(), 5);
+      await page.locator('.references-section').scrollIntoViewIfNeeded();
+      assert(await featured.first().isVisible());
       const next = page.locator('.slide-next');
       await next.click();
       assert.equal(await page.locator('.slide-counter').textContent(), '02 / 03');
@@ -97,6 +125,6 @@ const output = process.env.PREVIEW_DIR;
     }
     await noJS.close();
     assert.deepEqual(errors,[]);
-    console.log(`PASS: ${checks} page/viewport checks; all navigation destinations; drawer keyboard/focus/backdrop/close; carousel navigation/wrap/keyboard; logos; no-JS fallback; reduced motion; no JavaScript or HTTP errors. Base: ${base}`);
+    console.log(`PASS: ${checks} page/viewport checks; all navigation destinations; drawer keyboard/focus/backdrop/close; carousel navigation/wrap/keyboard; logos; dark surfaces/contrast; contact-only phone/email; 5 visible references; no-JS fallback; reduced motion; no JavaScript or HTTP errors. Base: ${base}`);
   } finally { await browser.close(); }
 })().catch(error=>{console.error(error);process.exitCode=1});
