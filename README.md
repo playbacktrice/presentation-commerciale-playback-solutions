@@ -29,7 +29,7 @@ SITE_URL=http://127.0.0.1:8000/ node scripts/check_browser.cjs
 - `assets/site.css` : compositions, menu latéral, responsive et préférences de mouvement.
 - `assets/site.js` : panneau de navigation et carrousel manuel.
 - `data/media.json` : quinze entrées photographiques réutilisées dans les pages, crédits et autorisations.
-- `data/projects.json` : les 40 entrées communiquées sont conservées ; les 35 entrées confirmées alimentent 32 groupes dans le volet « Toutes les références ». Les cinq entrées encore ambiguës ne sont pas exposées.
+- `data/projects.json` : les 40 entrées communiquées sont conservées ; les 39 entrées confirmées alimentent 34 groupes dans le volet « Toutes les références ». L’entrée MC 2023 reste à identifier et n’est pas exposée.
 - `assets/*.png` : les quatre logos officiels, conservés sans modification.
 
 Les anciennes pages institutionnelles et les visuels abstraits de la V1 sont retirés de cette branche. Ces suppressions ne concernent pas `main` ni le dossier de prévisualisation existant.
@@ -72,6 +72,12 @@ Une section d’accueil Références présente Justice, Polo & Pan, Mylène Farm
 
 L’accueil met d’abord en avant le laboratoire d’ingénierie et ses développements sur mesure. Six pictogrammes SVG originaux au trait, accompagnés de titres et d’une ligne de description, forment une bande compacte dans la présentation. Aucun nouveau lien dans le menu. Creative Lab dispose de deux séquences dédiées aux contrôleurs/interfaces et aux logiciels/systèmes spécifiques, avec des emplacements photographiques réels à compléter.
 
-La sélection photographique contient sept références, dont Kungs et Damso. Le volet natif HTML `details` / `summary` « Toutes les références » fonctionne sans JavaScript. Les 35 entrées marquées `publication_approved: true` dans le fichier source sont regroupées par nom en 32 artistes ou productions, avec leurs éditions. Les entrées non confirmées restent dans les données sans être publiées comme références. L’inventaire exact figure dans `REFERENCES.md`.
+La sélection photographique contient sept références, dont Kungs et Damso. Le volet natif HTML `details` / `summary` « Toutes les références » fonctionne sans JavaScript. Les 39 entrées marquées `publication_approved: true` dans le fichier source sont regroupées par nom en 32 artistes ou productions, avec leurs éditions. Les entrées non confirmées restent dans les données sans être publiées comme références. L’inventaire exact figure dans `REFERENCES.md`.
 
 Une entrée de collection sans image affiche seulement son nom et ses éditions, sans grande case vide. Pour ajouter une photographie autorisée à une référence confirmée, utiliser les champs `image`, `image_alt` et `image_credit` du fichier de projets. Le fichier doit exister sous `assets/photos/`. Le contrôle des chemins, textes alternatifs et crédits est partagé avec les autres photographies. Aucun résultat ou rôle technique n’est généré depuis le nom d’un artiste.
+
+## Confirmations de références reçues
+
+Claire Laffut — 2021 ; MC Solaar — 2022 et 2023 regroupés sous un seul nom ; « Mylène le retour » regroupé avec les autres éditions de Mylène Farmer. Les quatre entrées correspondantes sont maintenant confirmées. L’entrée distincte « MC 2023 » reste exclue. La collection de développement contient 34 groupes et 39 entrées, sans doublon ; les autres références sont inchangées.
+
+Ces corrections constituent un nouveau commit de développement. L’autorisation de publication reçue porte sur 5321d97 et non sur ce nouveau commit : attendre un accord explicite avant d’actualiser à nouveau preview/.

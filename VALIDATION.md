@@ -8,14 +8,14 @@ Changements limités à `feat/refonte-site-vitrine`, à partir de `7f719bc`. Le 
 - Six compétences avec pictogrammes SVG au trait, intégrées à la présentation : Sur mesure, Contrôleurs, Logiciels, Systèmes, Synchronisation et Fiabilité. Une ligne sur ordinateur, deux colonnes sur mobile.
 - Creative Lab renforcé : contrôleurs/interfaces puis logiciels/systèmes spécifiques. Trois emplacements pour les photographies des réalisations réelles.
 - Sept références mises en avant : Justice, Polo & Pan, Mylène Farmer, Eddy de Pretto, Kungs, Damso et Jeux olympiques de Paris 2024.
-- Collection complète repliée par défaut via HTML natif : les 35 entrées confirmées du fichier existant sont regroupées en 32 artistes ou productions, avec leurs éditions. Sans photographie, une entrée est uniquement typographique. Une photo autorisée peut être intégrée progressivement sans créer une page de plus.
-- Les cinq entrées marquées à confirmer restent dans les données, hors affichage : Clara Lafut 2021, MC Solar 2022, MC 2023, MC Solar 2023 et Mylène le retour. Aucune référence, prestation, responsabilité ou résultat inventé. Inventaire exact dans `REFERENCES.md`.
+- Collection complète repliée par défaut via HTML natif : les 39 entrées confirmées du fichier existant sont regroupées en 32 artistes ou productions, avec leurs éditions. Sans photographie, une entrée est uniquement typographique. Une photo autorisée peut être intégrée progressivement sans créer une page de plus.
+- L’entrée MC 2023 reste dans les données, hors affichage, en attendant son identification. Aucune référence, prestation, responsabilité ou résultat inventé. Inventaire exact dans `REFERENCES.md`.
 
 ## Vérifications réalisées
 
 - Cinq pages, 88 liens/ressources/fragments locaux, coordonnées uniquement dans Contact et textes français hors noms propres/termes techniques autorisés.
 - Six pictogrammes et bande compacte contrôlés en navigateur : hauteur inférieure à 160 px sur ordinateur/tablette et à 380 px sur petit mobile.
-- Sept références sélectionnées ; 32 groupes dans le volet ; correspondance exacte de chacun des 35 slugs confirmés, sans doublon ni entrée non confirmée.
+- Sept références sélectionnées ; 34 groupes dans le volet ; correspondance exacte de chacun des 35 slugs confirmés, sans doublon ni entrée non confirmée.
 - Regroupement des éditions de Mylène Farmer et Jean-Michel Jarre vérifié ; ouverture et fermeture du volet au clavier et à la souris ; ouverture également sans JavaScript.
 - Quinze entrées de médias, emplacements de photos réelles identifiés. Dans une copie isolée, photo locale validée acceptée dans le carrousel et dans une référence de collection ; photo non validée rejetée.
 - Logos et fichier source des 40 entrées inchangés ; génération HTML reproductible ; syntaxe JavaScript et diff vérifiés.
@@ -28,3 +28,9 @@ Tests effectués dans Chromium ; pas d’audit d’accessibilité exhaustif ni d
 ## Mise en ligne
 
 Cette évolution n’est pas publiée. Les captures sont locales. Attendre une autorisation explicite avant de mettre à jour `/preview/`.
+
+## Confirmations de références reçues
+
+Claire Laffut — 2021 ; MC Solaar — 2022 et 2023 regroupés sous un seul nom ; « Mylène le retour » regroupé avec les autres éditions de Mylène Farmer. Les quatre entrées correspondantes sont maintenant confirmées. L’entrée distincte « MC 2023 » reste exclue. La collection de développement contient 34 groupes et 39 entrées, sans doublon ; les autres références sont inchangées.
+
+Ces corrections constituent un nouveau commit de développement. L’autorisation de publication reçue porte sur 5321d97 et non sur ce nouveau commit : attendre un accord explicite avant d’actualiser à nouveau preview/.

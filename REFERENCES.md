@@ -1,12 +1,13 @@
 # Références intégrées à la version de développement
 
-Source : `data/projects.json`, liste déjà fournie dans les échanges. Aucun nom ni aucune intervention ajoutés. Les 35 entrées marquées `publication_approved: true` sont exposées dans 32 groupes. Les éditions sont conservées telles que communiquées.
+39 entrées confirmées regroupées en 34 artistes ou productions. Source : liste existante et confirmations explicites de Claire Laffut, MC Solaar et « Mylène le retour ». Aucune intervention ajoutée.
 
 | Artiste ou production | Éditions / précisions fournies |
 | --- | --- |
 | Amir | 2022 |
 | Caravan Palace | 2019 |
 | Céline symphonique | Non précisé |
+| Claire Laffut | 2021 |
 | Damso | Non précisé |
 | Djadja & Dinaz | Depuis 2022 |
 | Eddy de Pretto | 2024 |
@@ -26,7 +27,8 @@ Source : `data/projects.json`, liste déjà fournie dans les échanges. Aucun no
 | Les Enfoirés | 2022 |
 | Louane | 2024 |
 | Mathieu Chedid — M | Le Grand Petit Concert |
-| Mylène Farmer | 2019 ; Nevermore |
+| MC Solaar | 2022 ; 2023 |
+| Mylène Farmer | 2019 ; Nevermore ; Mylène le retour |
 | Nouvelle École | Saison 1 |
 | PNL | 2022 |
 | Polo & Pan | Non précisé |
@@ -41,12 +43,8 @@ Source : `data/projects.json`, liste déjà fournie dans les échanges. Aucun no
 
 Justice ; Polo & Pan ; Mylène Farmer ; Eddy de Pretto ; Kungs ; Damso ; Jeux olympiques de Paris 2024.
 
-## Entrées conservées dans les données, non affichées avant confirmation
+## Entrée conservée dans les données, non affichée avant identification
 
-- Clara Lafut — 2021.
-- MC Solar — 2022.
 - MC — 2023.
-- MC Solar — 2023.
-- Mylène le retour.
 
-Ces cinq entrées restent en attente de confirmation de leur intitulé. Elles ne sont pas exposées comme références confirmées. Aucun périmètre technique, crédit photographique ou résultat n’est déduit de cette liste.
+Aucune autre référence retirée. Les noms corrigés et les éditions ne créent pas de doublons. Aucun périmètre technique, crédit photographique ou résultat n’est déduit de cette liste.

@@ -94,11 +94,15 @@ const output = process.env.PREVIEW_DIR;
       await summary.focus();
       await page.keyboard.press('Enter');
       assert(await details.evaluate(el=>el.open));
-      assert.equal(await page.locator('.collection-card:visible').count(), 32);
-      assert.equal(await page.locator('.collection-card').evaluateAll(cards=>cards.flatMap(card=>card.dataset.projectSlugs.split(' ')).length), 35);
+      assert.equal(await page.locator('.collection-card:visible').count(), 34);
+      assert.equal(await page.locator('.collection-card').evaluateAll(cards=>cards.flatMap(card=>card.dataset.projectSlugs.split(' ')).length), 39);
       assert((await page.locator('[data-project-slugs~="mylene-farmer-nevermore"]').textContent()).includes('2019 · Nevermore'));
       assert((await page.locator('[data-project-slugs~="jarre-al-ula"]').textContent()).includes('Al Ula · The Green Concert'));
       assert(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth+1), `Collection overflow at ${width}px`);
+      assert((await page.locator('[data-project-slugs~="mc-solaar-2022"]').textContent()).includes('2022 · 2023'));
+      assert((await page.locator('[data-project-slugs~="mylene-farmer-nevermore"]').textContent()).includes('2019 · Nevermore · Mylène le retour'));
+      assert((await page.locator('[data-project-slugs~="claire-laffut-2021"]').textContent()).includes('Claire Laffut'));
+      assert.equal(await page.locator('[data-project-slugs~="mc-2023"]').count(), 0);
       await summary.click();
       assert(!(await details.evaluate(el=>el.open)));
       await page.locator('.references-section').scrollIntoViewIfNeeded();
@@ -143,11 +147,11 @@ const output = process.env.PREVIEW_DIR;
       await p.goto(base+file);
       assert(await p.locator('nav a').first().isVisible());
       assert(await p.locator('h1').isVisible());
-      if(file==='index.html') { await p.locator('.reference-collection summary').click(); assert.equal(await p.locator('.collection-card:visible').count(),32); }
+      if(file==='index.html') { await p.locator('.reference-collection summary').click(); assert.equal(await p.locator('.collection-card:visible').count(),34); }
       assert(await p.evaluate(()=>document.documentElement.scrollWidth <= innerWidth+1),`No-JS overflow on ${file}`);
     }
     await noJS.close();
     assert.deepEqual(errors,[]);
-    console.log(`PASS: ${checks} page/viewport checks; all navigation destinations; drawer keyboard/focus/backdrop/close; carousel navigation/wrap/keyboard; logos; dark surfaces/contrast; contact-only phone/email; 6 compact pictograms; 7 featured references; 35 approved entries/32 native expandable groups; no-JS fallback; reduced motion; no JavaScript or HTTP errors. Base: ${base}`);
+    console.log(`PASS: ${checks} page/viewport checks; all navigation destinations; drawer keyboard/focus/backdrop/close; carousel navigation/wrap/keyboard; logos; dark surfaces/contrast; contact-only phone/email; 6 compact pictograms; 7 featured references; 39 approved entries/34 native expandable groups; no-JS fallback; reduced motion; no JavaScript or HTTP errors. Base: ${base}`);
   } finally { await browser.close(); }
 })().catch(error=>{console.error(error);process.exitCode=1});

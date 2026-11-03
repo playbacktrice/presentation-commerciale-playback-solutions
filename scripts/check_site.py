@@ -81,9 +81,13 @@ def main():
     projects=json.loads((ROOT/'data/projects.json').read_text())
     approved=[item for item in projects if item.get('publication_approved') is True]
     integrated=[slug for group in docs['index.html'].collection for slug in group]
-    assert len(approved)==35 and len(docs['index.html'].collection)==32
+    assert len(approved)==39 and len(docs['index.html'].collection)==34
     assert sorted(integrated)==sorted(item['slug'] for item in approved)
     assert len(integrated)==len(set(integrated))
+    assert {item['name'] for item in approved if item['slug'].startswith('mc-solaar-')}=={'MC Solaar'}
+    assert [item['edition'] for item in approved if item['name']=='MC Solaar']==['2022','2023']
+    assert [item['edition'] for item in approved if item['name']=='Mylène Farmer']==['2019','Nevermore','Mylène le retour']
+    assert any(item['name']=='Claire Laffut' and item['edition']=='2021' for item in approved)
     assert not set(integrated).intersection(item['slug'] for item in projects if item.get('publication_approved') is not True)
     assert (ROOT/'index.html').read_text().count('<li>')==6
     # Validate the future photo path using an isolated fixture, never a site image.
@@ -107,7 +111,7 @@ def main():
         (fixture/'data/media.json').write_text(json.dumps(data))
         result=subprocess.run(['python3',str(fixture/'scripts/build.py')],capture_output=True)
         assert result.returncode!=0 and b'validated photo' in result.stderr
-    print(f'PASS: 5 pages; {checked} internal links/assets/anchors; 15 photo entries; 7 featured references; all 35 approved entries in 32 groups; contacts restricted to contact sections; all 40 source references retained; validated-photo fixture accepted and unapproved fixture rejected.')
+    print(f'PASS: 5 pages; {checked} internal links/assets/anchors; 15 photo entries; 7 featured references; all 39 approved entries in 34 groups; contacts restricted to contact sections; all 40 source references retained; validated-photo fixture accepted and unapproved fixture rejected.')
 
 
 if __name__=='__main__':main()
